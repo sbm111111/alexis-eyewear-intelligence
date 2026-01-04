@@ -17,20 +17,24 @@ Alexis眼镜智能系统 - 基于AI的眼镜品牌数据管理和分析系统
 
 ```
 alexis-eyewear-intelligence/
-├── personas/              # Persona定义和评审标准
+├── personas/              # Persona定义和Node配置
+│   ├── 00_小M_赛博合伙人PM.md
 │   ├── 01_甲方_60岁买手美术教授.md
 │   ├── 02_五个行业专家Personas.md
-│   └── README.md
+│   └── nodes/            # Node配置文件
+│       ├── node_00_小M.json
+│       └── node_01_甲方.json
 ├── docs/                  # 文档和设计
-│   ├── architecture.md    # 系统架构设计
-│   ├── agent-loop.md      # Agent Loop设计
-│   └── data-model.md      # 数据模型设计
-├── data/                  # 数据文件
-│   ├── brand-dictionary.csv    # 品牌字典
-│   ├── raw/                    # 原始数据
-│   └── cleaned/                # 清洗后数据
+│   └── node-architecture.md    # Node架构设计
+├── context/               # 沟通上下文
+│   ├── communication-style.md  # 对话风格指南
+│   ├── faq.md                  # 常见问题
+│   ├── decisions.md            # 决策记录
+│   └── workflow.md             # 工作流程
 └── README.md
 ```
+
+**重要说明：** 这个仓库只存储"脑子"（思维框架、协作机制、决策逻辑），不存储"数据"（品牌字典、商品数据等）。数据通过外部方式管理。
 
 ## Persona体系
 
