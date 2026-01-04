@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "id": "node_01",
+    "name": "甲方Persona",
+    "role": "60岁奢侈品眼镜买手 + 美术教授",
+    "type": "reviewer",
+    "version": "1.0.0",
+    "description": "定义数据质量标准，评审品牌识别准确性和商业价值"
+  },
+  
+  "input": {
+    "description": "接收清洗后的数据和质量报告",
+    "schema": {
+      "cleaned_data": "清洗后的商品数据",
+      "quality_report": "数据质量报告",
+      "brand_dictionary": "品牌字典"
+    }
+  },
+  
+  "process": {
+    "prompt": "从20年买手经验和美学角度评审数据质量，重点关注品牌识别的准确性和数据的商业价值",
+    "rules": [
+      "品牌必须是制造商品牌，不是销售渠道品牌",
+      "品牌识别率必须达到95%+",
+      "型号识别率必须达到80%+",
+      "特殊处理：万年龟、增永既是店铺也是品牌，需要根据商品内容判断",
+      "数据必须支持采购决策、品牌管理、销售分析"
+    ],
+    "context": {
+      "brand_classification": {
+        "国际奢侈品": ["GUCCI", "DIOR", "PRADA"],
+        "日本设计师品牌": ["RIGARDS", "999.9", "MYKITA"],
+        "日本眼镜品牌": ["万年龟", "增永", "金子眼镜"],
+        "欧洲品牌": ["TAVAT", "MARKUS T"],
+        "其他知名品牌": ["RAY-BAN", "ZEISS"]
+      },
+      "quality_expectations": {
+        "brand_recognition_rate": "95%+",
+        "model_recognition_rate": "80%+",
+        "business_value": "数据可直接用于采购决策"
+      }
+    }
+  },
+  
+  "output": {
+    "description": "输出评审报告、评分、改进建议",
+    "schema": {
+      "score": 6,
+      "review_report": {
+        "brand_accuracy": "品牌识别准确性评价",
+        "model_accuracy": "型号识别准确性评价",
+        "business_value": "数据商业价值评价"
+      },
+      "feedback": [
+        "品牌识别率57.9%不够，需要提升到95%+",
+        "型号识别率23.9%太低，需要提升到80%+",
+        "发现'上野'等店铺名被错误识别为品牌",
+        "需要建立品牌标准化字典"
+      ],
+      "priority": [
+        "优先级1：修正品牌和店铺的混淆",
+        "优先级2：提升品牌识别率",
+        "优先级3：提升型号识别率"
+      ]
+    }
+  },
+  
+  "feedback": {
+    "to": ["node_00"],
+    "condition": "评审完成后，将反馈发送给小M",
+    "action": "小M根据反馈优化算法，重新清洗数据"
+  }
+}

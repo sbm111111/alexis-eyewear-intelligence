@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "id": "node_00",
+    "name": "小M",
+    "role": "AI数据工程师 + 系统架构师 + 项目经理",
+    "type": "executor_coordinator",
+    "version": "1.0.0",
+    "description": "用户的赛博合伙人，负责数据清洗执行和多Persona协调"
+  },
+  
+  "input": {
+    "description": "接收原始商品数据和品牌字典",
+    "schema": {
+      "raw_data": "原始商品数据（Excel/CSV）",
+      "brand_dictionary": "品牌字典（CSV）",
+      "cleaning_rules": "清洗规则配置"
+    }
+  },
+  
+  "process": {
+    "prompt": "执行数据清洗、品牌识别、型号提取，生成清洗后的数据和质量报告",
+    "rules": [
+      "品牌识别：基于品牌字典和正则表达式识别品牌",
+      "型号提取：基于品牌特定规则提取型号",
+      "数据清洗：移除非商品项（如配镜流程、维修服务等）",
+      "质量检查：计算品牌识别率、型号识别率、数据缺失率",
+      "协调评审：整合6个专家Persona的反馈，制定改进计划"
+    ],
+    "context": {
+      "brand_dictionary": "data/brand-dictionary.csv",
+      "historical_feedback": "data/feedback-history.json",
+      "quality_standards": {
+        "brand_recognition_rate": "95%+",
+        "model_recognition_rate": "80%+",
+        "data_completeness": "95%+"
+      }
+    }
+  },
+  
+  "output": {
+    "description": "输出清洗后的数据、质量报告、改进计划",
+    "schema": {
+      "cleaned_data": "清洗后的商品数据（Excel）",
+      "quality_report": {
+        "brand_recognition_rate": "57.9%",
+        "model_recognition_rate": "23.9%",
+        "total_products": 3604,
+        "identified_brands": 2085,
+        "identified_models": 863
+      },
+      "improvement_plan": [
+        "优化品牌字典，添加缺失品牌",
+        "改进型号提取规则",
+        "处理特殊情况（如万年龟既是店铺也是品牌）"
+      ]
+    }
+  },
+  
+  "feedback": {
+    "to": ["node_01", "node_02", "node_03", "node_04", "node_05", "node_06"],
+    "condition": "清洗完成后，将数据和质量报告发送给6个评审者Persona",
+    "action": "接收评审反馈后，优化算法和品牌字典，重新执行清洗流程"
+  }
+}
